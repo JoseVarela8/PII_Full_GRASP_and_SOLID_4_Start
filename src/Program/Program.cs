@@ -22,8 +22,29 @@ namespace Full_GRASP_And_SOLID
 
             Recipe recipe = new Recipe();
             recipe.FinalProduct = GetProduct("Café con leche");
+            
+            //Saco estos porque aplico el cambio requerido para el patrón creator
+            /*
             recipe.AddStep(new Step(GetProduct("Café"), 100, GetEquipment("Cafetera"), 120));
             recipe.AddStep(new Step(GetProduct("Leche"), 200, GetEquipment("Hervidor"), 60));
+            */
+
+            //CREATOR
+            //LA CLASE RECIPE ES EXPERTA EN CREAR INSTANCIAS DE STEP
+            recipe.AddStep(GetProduct("Café"), 100, GetEquipment("Cafetera"), 120);
+            recipe.AddStep(GetProduct("Leche"), 200, GetEquipment("Hervidor"), 60);
+            /*
+            // Ejemplo Creator de la lectura
+            
+            sale.AddLineItem(new SalesLineItem(1, ProductAt(0)));
+            sale.AddLineItem(new SalesLineItem(2, ProductAt(1)));
+            sale.AddLineItem(new SalesLineItem(3, ProductAt(2)));
+
+            sale.AddLineItem(1, ProductAt(0));
+            sale.AddLineItem(2, ProductAt(1));
+            sale.AddLineItem(3, ProductAt(2));
+            */
+
 
             IPrinter printer;
             printer = new ConsolePrinter();
@@ -41,6 +62,7 @@ namespace Full_GRASP_And_SOLID
             AddEquipmentToCatalog("Cafetera", 1000);
             AddEquipmentToCatalog("Hervidor", 2000);
         }
+
 
         private static void AddProductToCatalog(string description, double unitCost)
         {
